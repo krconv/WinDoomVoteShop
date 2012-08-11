@@ -1,0 +1,8 @@
+name: WinDooMVoteShop
+main: me.krconv.WinDooMVoteShop.WinDooMVoteShop
+version: 1.0
+description: >
+             WinDooM's VoteShop Plugin!
+commands:
+  voteshop:
+    description: WindooM's VoteShop Plugin!
