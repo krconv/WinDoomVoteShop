@@ -67,11 +67,13 @@ public class WinDoomVoteShop extends JavaPlugin {
 			// Must see if any args exist after "command"
 			if (args.length > 2) {
 				String commandToRun = stripLeadingSlash(intoCommand(args, 2));
-				if (getServer().getPlayer(args[1]) != null) {
+				Player player = getServer().getPlayer(args[1]);
+				if (player != null) {
 					this.getLogger().info("Executed command for Player: " + args[1] + ", Command: " + commandToRun);
 					sender.sendMessage("Executed");
 					getServer().dispatchCommand(getServer().getConsoleSender(), commandToRun);
 					writeLogFile("Executed command for Player:" + args[1] + " Command:" + commandToRun);
+					player.sendMessage(ChatColor.GREEN + "[VoteShop]  Vote shop purchase has been issued.");
 					return true;
 				} else {
 					this.getLogger().info("Queued command for Player: " + args[1] + ", Command: " + commandToRun);

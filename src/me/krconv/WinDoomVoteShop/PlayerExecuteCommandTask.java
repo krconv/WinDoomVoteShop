@@ -2,6 +2,7 @@ package me.krconv.WinDoomVoteShop;
 
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -29,8 +30,15 @@ public class PlayerExecuteCommandTask implements Runnable {
 		// Only issue command if the entity IDs match.
 		
 		Player newPlayerObject = plugin.getServer().getPlayer(playerName); // Get current player object for player
-		int newEntityID = newPlayerObject.getEntityId(); // Get current entity ID for player
-
+		int newEntityID; // Hold current entity ID for player
+		
+		if (newPlayerObject != null) {
+			newEntityID = newPlayerObject.getEntityId(); // Get current entity ID for player
+		} else {
+			// New player object is null, player must not be online
+			return;
+		}
+		
 		if (newEntityID == entityID) {
 			// Entity ID passed to this task matches the current entity ID of this player, so 
 			// this task can continue.
@@ -39,7 +47,7 @@ public class PlayerExecuteCommandTask implements Runnable {
 				plugin.getLogger().info("Executing queued command on login of Player: " + playerName + ", Command: " + command);
 				plugin.writeLogFile("Executing queued command on login of Player: " + playerName + ", Command: " + command);
 				plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), command);
-				newPlayerObject.sendMessage("VoteShop:  Queued vote shop purchases have been completed.");
+				newPlayerObject.sendMessage(ChatColor.GREEN + "[VoteShop]  Queued vote shop purchase has been issued.");
 			}
 			List<String> queueList = plugin.queue.getStringList(playerName);
 			queueList.clear();
@@ -48,6 +56,7 @@ public class PlayerExecuteCommandTask implements Runnable {
 		} else {
 			// Entity IDs do not match, player must have relogged
 			// Do nothing
+			return;
 		}
 	}
 
