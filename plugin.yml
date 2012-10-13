@@ -1,8 +1,9 @@
-name: WinDoomVoteShop
-main: me.krconv.WinDoomVoteShop.WinDoomVoteShop
+name: WinDooMVoteShop
+main: me.krconv.WinDooMVoteShop.WinDooMVoteShop
 version: 1.0
+softdepend: [Vault]
 description: >
-             WinDoom's VoteShop Plugin!
+             WinDooM's VoteShop Plugin!
 commands:
   voteshop:
-    description: WinDoom's VoteShop Plugin!
+    description: WinDooM's VoteShop Plugin!
